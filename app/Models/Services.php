@@ -4,10 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-
-class Appointment extends Model
+class Services extends Model
 {
     use HasFactory;
 
@@ -18,13 +16,6 @@ class Appointment extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'phone',
-        'password',        
-        'role'
+        'duration',
     ];
-    public function bookerUser(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 }
