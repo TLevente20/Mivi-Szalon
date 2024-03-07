@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Img;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('file_type');
+            $table->foreignIdFor(Img::class);
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->text('body');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('posts');
     }
 };

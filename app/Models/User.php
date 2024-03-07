@@ -21,9 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'phone',
         'password',        
-        'role'
     ];
 
     /**
@@ -45,10 +43,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    public function appointments(): HasMany
-    {
-        return $this->hasMany(Appointment::class);
-        
-    }
 }
