@@ -18,13 +18,19 @@ class Appointment extends Model
      */
     protected $fillable = [
         'name',
-        'email',
         'phone',
-        'password',        
-        'role'
+        'start_time',
+        'end_time',
+        'cancellation_time',
+        'cancellation_reason'
     ];
-    public function bookerUser(): BelongsTo
+    public function openDate(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(OpenDate::class);
+    }
+
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
     }
 }
