@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->time('duration');
+            $table->text('description')->nullable();
+            $table->time('ecpected_duration')->nullable();
+            $table->integer('price')->nullable();
             $table->timestamps();
         });
     }
