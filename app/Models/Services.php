@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class OpenDate extends Model
+class Services extends Model
 {
     use HasFactory;
 
@@ -16,14 +15,7 @@ class OpenDate extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'start_time',
-        'end_time'       
+        'name',
+        'duration',
     ];
-
-    public function appointment(): HasMany
-    {
-        return $this->hasMany(Appointment::class);
-    }
-
-
 }
