@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AppointmentResource\Widgets;
+namespace App\Filament\Widgets;
 
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 
