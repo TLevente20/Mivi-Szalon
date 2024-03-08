@@ -61,4 +61,13 @@ class AppointmentResource extends Resource
             'edit' => Pages\EditAppointment::route('/{record}/edit'),
         ];
     }
+
+    public static function getWidgets(): array
+{
+    return [
+        AppointmentResource\Widgets\CalendarWidget::class,
+    ];
+}
+
+    
 }
