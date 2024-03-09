@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use AnourValar\EloquentSerialize\Service;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,13 +19,17 @@ class Appointment extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'phone',
-        'password',        
-        'role'
+        'start_time',
+        'end_time',
+        'cancellation_time',
+        'cancellation_reason',
+        'phone',        
+        'service_id'
     ];
-    public function bookerUser(): BelongsTo
+
+    public function service(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Service::class);
     }
+    
 }
