@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\AppointmentResource\Pages;
 use App\Filament\Resources\AppointmentResource\RelationManagers;
 use App\Models\Appointment;
+use App\Models\Service;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,6 +17,8 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
+
+
 
 class AppointmentResource extends Resource
 {
@@ -29,13 +32,16 @@ class AppointmentResource extends Resource
     {
         return $form
             ->schema([  
-                Select::make('service_id')
-                    ->relationship(name: 'service', titleAttribute: 'name'),
+                
                 TextInput::make('name')->label('Név'),
                 TextInput::make('phone')->label('Telefonszám')->tel()->default('+36'),
+                Select::make('service_id')
+                    ->label('Szolgáltatás')
+                    ->options(Service::all()->pluck('name', 'id'))
+                    ->searchable(),
                 DateTimePicker::make('start_time')->label('Időpont kezdete'),
                 DateTimePicker::make('end_time')->label('Időpont vége'),
-            ])
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -43,6 +49,7 @@ class AppointmentResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')->label('Név'),
+                TextColumn::make('service.name')->label('Szolgáltatás'),
                 TextColumn::make('phone')->label('Telefonszám'),
                 TextColumn::make('start_time')->label('Időpont kezdete'),
                 TextColumn::make('end_time')->label('Időpont vége'),
@@ -63,7 +70,7 @@ class AppointmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+           
         ];
     }
 
