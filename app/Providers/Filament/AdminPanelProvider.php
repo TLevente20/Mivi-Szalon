@@ -29,6 +29,32 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->plugin(
+                FilamentFullCalendarPlugin::make()
+                ->config(
+                    [
+                        'timeZone' => config('app.timezone'),
+                    
+                        'locale' => config('app.locale'),
+                    
+                        'headerToolbar' => [
+                            'left'   => 'prev,next today',
+                            'center' => 'title',
+                            'right'  => 'dayGridMonth,timeGridWeek'
+                        ],
+                    
+                        'height' => 550,
+
+                        'navLinks' => false,
+                    
+                        'editable' => false,
+                    
+                        'selectable' => false,
+                    
+                        'dayMaxEvents' => true
+                    ]
+                )
+            )
             ->login()
             ->colors([
                 'primary' => Color::Amber,
@@ -36,11 +62,11 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-                Pages\Dashboard::class,
+                
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                
+                CalendarWidget::class
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -24,6 +24,8 @@ class ServiceResource extends Resource
 {
     protected static ?string $model = Service::class;
 
+    protected static ?string $label = 'Szolgáltatás';
+
     protected static ?string $navigationLabel = 'Szolgáltatásaim';
 
     protected static ?string $navigationIcon = 'heroicon-o-scissors';
@@ -32,7 +34,7 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')->label('Szolgáltatás Neve'),
+                TextInput::make('name')->label('Szolgáltatás Neve')->required()->maxLength(200),
                 TextInput::make('excpected_duration')->label('Várható időtartam')->numeric()->suffix('perc'),
                 TextInput::make('price')->label('Ár')->numeric()->suffix(' Ft'),
                 Textarea::make('description')->label('Leírás'),

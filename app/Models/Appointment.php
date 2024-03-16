@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\AppointmentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,13 +19,23 @@ class Appointment extends Model
      */
     protected $fillable = [
         'name',
-        'email',
-        'phone',
-        'password',        
-        'role'
+        'start_time',
+        'end_time',
+        'cancellation_time',
+        'cancellation_reason',
+        'phone',        
+        'service_id',
+        'status',
+        'dog_name',
+        'dog_type'
     ];
-    public function bookerUser(): BelongsTo
+
+    public function service(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Service::class);
     }
+    
+    protected $casts = [
+        'status' => AppointmentStatus::class,
+    ];
 }

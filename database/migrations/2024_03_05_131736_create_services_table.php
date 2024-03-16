@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->time('duration');
+            $table->text('description')->nullable();
+            $table->smallInteger('excpected_duration')->nullable();
+            $table->mediumInteger('price')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }
