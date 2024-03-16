@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+
 class Service extends Model
 {
     use HasFactory;
@@ -19,10 +20,11 @@ class Service extends Model
         'name',
         'description',
         'excpected_duration',
-        'price'
+        'price',
+        'icon'
     ];
 
-    public function appointment(): HasMany
+    public function appointments(): HasMany
     {
         return $this->hasMany(Appointment::class);
     }

@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->time('ecpected_duration')->nullable();
-            $table->integer('price')->nullable();
+            $table->smallInteger('excpected_duration')->nullable();
+            $table->mediumInteger('price')->nullable();
+            $table->string('icon')->nullable();
             $table->timestamps();
         });
     }
