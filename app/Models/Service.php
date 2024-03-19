@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Services extends Model
+
+class Service extends Model
 {
     use HasFactory;
 
@@ -16,6 +18,14 @@ class Services extends Model
      */
     protected $fillable = [
         'name',
-        'duration',
+        'description',
+        'excpected_duration',
+        'price',
+        'icon'
     ];
+
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
