@@ -52,13 +52,13 @@ class AppointmentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Név'),
-                TextColumn::make('service.name')->label('Szolgáltatás'),
+                TextColumn::make('name')->label('Név')->sortable()->searchable(),
+                TextColumn::make('service.name')->label('Szolgáltatás')->sortable()->searchable(),
                 TextColumn::make('phone')->label('Telefonszám'),
-                TextColumn::make('start_time')->label('Időpont kezdete')->dateTime('Y-m-d H:i'),
-                TextColumn::make('end_time')->label('Időpont vége')->dateTime('Y-m-d H:i'),
+                TextColumn::make('start_time')->label('Időpont kezdete')->dateTime('Y-m-d H:i')->sortable(),
+                TextColumn::make('end_time')->label('Időpont vége')->dateTime('Y-m-d H:i')->sortable(),
                 TextColumn::make('status')
-                    ->badge()->label('Foglalás státusza')
+                    ->badge()->label('Foglalás státusza')->sortable()
             ])
             ->filters([
                 //

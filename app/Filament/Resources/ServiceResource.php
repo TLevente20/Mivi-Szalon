@@ -45,8 +45,8 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Név'),
-                TextColumn::make('excpected_duration')->label('Várható időtartam')->suffix(' perc'),
+                TextColumn::make('name')->label('Név')->sortable()->searchable(),
+                TextColumn::make('excpected_duration')->label('Várható időtartam')->suffix(' perc')->sortable(),
             ])
             ->filters([
                 //
