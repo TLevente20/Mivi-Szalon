@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->dateTime('start_time', $precision = 0);
             $table->dateTime('end_time', $precision = 0);
+            $table->mediumInteger('price')->nullable();
             $table->enum('status', ['ACTIVE','CANCELLED','INTIME','MISSED']);
             $table->dateTime('cancellation_time', $precision = 0)->nullable();
-            $table->text('cancellation_reason')->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 use function PHPUnit\Framework\matches;
 
@@ -35,13 +37,24 @@ class AppointmentResource extends Resource
                 TextInput::make('name')->label('Név')->required()->maxLength(200),
                 TextInput::make('dog_name')->label('Kutya neve')->maxLength(200),
                 TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200),
-                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->required()->maxLength(50),
+                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->maxLength(50),
+
                 Select::make('service_id')
                     ->label('Szolgáltatás')
                     ->options(Service::all()->pluck('name','id'))
-                    ->searchable()->required(),
+                    ->searchable()->required()->afterStateUpdated(
+
+                        function (Set $set, Get $get) {
+                            $service_id = $get('service_id');
+                            $service = Service::select('price')->where('id',$service_id)->first();
+                            $set('price', $service->price);
+                        }
+                        
+                    )->live(), 
+
                 DateTimePicker::make('start_time')->label('Időpont kezdete')->seconds(false)->required(),
                 DateTimePicker::make('end_time')->label('Időpont vége')->seconds(false)->required()->after('start_time'),
+                TextInput::make('price')->label('Ár')->numeric()->suffix(' Ft'),
                 ToggleButtons::make('status')
                     ->options(AppointmentStatus::class)->inline()
                     ->label('Foglalás Státusza')->default('ACTIVE')->required()
