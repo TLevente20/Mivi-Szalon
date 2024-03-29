@@ -3,8 +3,9 @@
     <head>
         <meta charset="utf-8">
         <title>{{ $title ?? 'Page Title' }}</title>
+        @vite('resources/css/app.css')
     </head>
-    <body>
+    <body class='font-poppins'>
         <livewire:nav-bar/>
         {{ $slot }}
         
