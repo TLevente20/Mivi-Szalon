@@ -46,11 +46,15 @@ class AdminPanelProvider extends PanelProvider
 
                         'navLinks' => false,
                     
-                        'editable' => true,
+                        'editable' => false,
+
+                        'eventDurationEditable' => false,
                     
                         'selectable' => false,
                     
-                        'dayMaxEvents' => true
+                        'dayMaxEvents' => true,
+
+                        'scrollTime' => '08:00:00'
                     ]
                 )
             )

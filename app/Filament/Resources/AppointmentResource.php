@@ -34,10 +34,10 @@ class AppointmentResource extends Resource
         return $form
             ->schema([  
                 
-                TextInput::make('name')->label('Név')->required()->maxLength(200),
-                TextInput::make('dog_name')->label('Kutya neve')->maxLength(200),
-                TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200),
-                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->maxLength(50),
+                TextInput::make('name')->label('Név')->required()->maxLength(200)->autocomplete(),
+                TextInput::make('dog_name')->label('Kutya neve')->maxLength(200)->autocomplete(),
+                TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200)->autocomplete(),
+                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->maxLength(50)->autocomplete(),
 
                 Select::make('service_id')
                     ->label('Szolgáltatás')
@@ -49,7 +49,7 @@ class AppointmentResource extends Resource
                             $service = Service::select('price')->where('id',$service_id)->first();
                             $set('price', $service->price);
                         }
-                        
+
                     )->live(), 
 
                 DateTimePicker::make('start_time')->label('Időpont kezdete')->seconds(false)->required(),
