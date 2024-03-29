@@ -20,8 +20,9 @@ export default {
         'my-white' : {
           100 : '#F8F9FA',
           200 : '#E9ECEF',
-          300 : '#DEE2E6',
-          400 : '#CED4DA'
+          300 : '#F4F5F6',
+          400 : '#DEE2E6',
+          500 : '#CED4DA'
         },
         'my-pink' : {
           100 : '#FF8FAB'
