@@ -27,7 +27,8 @@ class Appointment extends Model
         'service_id',
         'status',
         'dog_name',
-        'dog_type'
+        'dog_type',
+        'price'
     ];
 
     public function service(): BelongsTo

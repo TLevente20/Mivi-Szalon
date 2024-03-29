@@ -19,7 +19,7 @@ return [
 
     'navLinks' => true,
 
-    'editable' => true,
+    'editable' => false,
 
     'selectable' => false,
 

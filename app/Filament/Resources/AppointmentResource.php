@@ -14,6 +14,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\ToggleButtons;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 use function PHPUnit\Framework\matches;
 
@@ -32,16 +34,27 @@ class AppointmentResource extends Resource
         return $form
             ->schema([  
                 
-                TextInput::make('name')->label('Név')->required()->maxLength(200),
-                TextInput::make('dog_name')->label('Kutya neve')->maxLength(200),
-                TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200),
-                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->required()->maxLength(50),
+                TextInput::make('name')->label('Név')->required()->maxLength(200)->autocomplete(),
+                TextInput::make('dog_name')->label('Kutya neve')->maxLength(200)->autocomplete(),
+                TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200)->autocomplete(),
+                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->maxLength(50)->autocomplete(),
+
                 Select::make('service_id')
                     ->label('Szolgáltatás')
                     ->options(Service::all()->pluck('name','id'))
-                    ->searchable()->required(),
+                    ->searchable()->required()->afterStateUpdated(
+
+                        function (Set $set, Get $get) {
+                            $service_id = $get('service_id');
+                            $service = Service::select('price')->where('id',$service_id)->first();
+                            $set('price', $service->price);
+                        }
+
+                    )->live(), 
+
                 DateTimePicker::make('start_time')->label('Időpont kezdete')->seconds(false)->required(),
                 DateTimePicker::make('end_time')->label('Időpont vége')->seconds(false)->required()->after('start_time'),
+                TextInput::make('price')->label('Ár')->numeric()->suffix(' Ft'),
                 ToggleButtons::make('status')
                     ->options(AppointmentStatus::class)->inline()
                     ->label('Foglalás Státusza')->default('ACTIVE')->required()
@@ -52,13 +65,13 @@ class AppointmentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Név'),
-                TextColumn::make('service.name')->label('Szolgáltatás'),
+                TextColumn::make('name')->label('Név')->sortable()->searchable(),
+                TextColumn::make('service.name')->label('Szolgáltatás')->sortable()->searchable(),
                 TextColumn::make('phone')->label('Telefonszám'),
-                TextColumn::make('start_time')->label('Időpont kezdete')->dateTime('Y-m-d H:i'),
-                TextColumn::make('end_time')->label('Időpont vége')->dateTime('Y-m-d H:i'),
+                TextColumn::make('start_time')->label('Időpont kezdete')->dateTime('Y-m-d H:i')->sortable(),
+                TextColumn::make('end_time')->label('Időpont vége')->dateTime('Y-m-d H:i')->sortable(),
                 TextColumn::make('status')
-                    ->badge()->label('Foglalás státusza')
+                    ->badge()->label('Foglalás státusza')->sortable()
             ])
             ->filters([
                 //
