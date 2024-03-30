@@ -1,6 +1,8 @@
 <x-layout>
-    <div> {{-- whole page --}}
-        <div class="mx-28 flex mt-12"> {{-- Hero --}}
+    {{-- whole page --}}
+    <div> 
+        {{-- Hero --}}
+        <div class="mx-28 flex mt-12"> 
             <div class="w-1/2 pt-8 mr-10">
                 <img src="{{ asset('img/mivi.logo.png') }}" class=" absolute h-[344px] ml-24 opacity-10">
                 <h1 class=" text-4xl font-semibold">Mivi Salon</h1>
@@ -17,5 +19,12 @@
                 </div>
             </div>
         </div>
+
+        {{-- Line and Title --}}
+        <div class=" bg-my-black-100 h-[73px] mt-20"></div>
+        <div class=" text-my-black-100 text-[33px] font-medium bg-my-white-300 mx-auto text-center max-w-[604px] py-8 mt-[-94px]">Szolgáltatásaink</div>
+
+        {{-- Services --}}
+        <livewire:home.services/>
     </div>
 </x-layout>

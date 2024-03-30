@@ -12,6 +12,7 @@ export default {
       },
       colors: {
         'my-gray' : {
+          50 : '#CCCCCC',
           100 : '#C0C0C0'
         },
         'my-black' : {
