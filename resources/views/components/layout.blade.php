@@ -6,7 +6,14 @@
         @vite('resources/css/app.css')
     </head>
     <body class='font-poppins'>
+        {{-- Header --}}
         <livewire:nav-bar/>
-        {{ $slot }}  
+
+        {{-- Page --}}
+        {{ $slot }}
+
+        {{-- Footer --}}
+        <livewire:footer/>
+
     </body>
 </html>

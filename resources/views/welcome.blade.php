@@ -26,5 +26,20 @@
 
         {{-- Services --}}
         <livewire:home.services/>
+
+        {{-- Posts --}}
+        <div class=" bg-my-gray-50 pb-14">
+            <h1 class="text-[33px] font-medium mx-28 pt-8 mb-16">Bejegyzések</h1>
+            <livewire:home.posts/>
+        </div>
+
+        {{-- Contact --}}
+        <div class="mb-12">
+            <h1 class="text-[40px] mx-28 mt-9 font-bold mb-1">Kapcsolatfelvétel:</h1>
+            <hr class="ml-28 border-t-[5px] border-my-black-100 rounded-full max-w-[200px] mb-28">
+            <livewire:home.contacts/>
+
+        </div>
+
     </div>
 </x-layout>
