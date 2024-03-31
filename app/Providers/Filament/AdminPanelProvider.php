@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Saade\FilamentFullCalendar\FilamentFullCalendarPlugin;
 use App\Filament\Widgets\CalendarWidget;
+use App\Filament\Widgets\CalendarWidgetSuper;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -69,7 +70,8 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                CalendarWidget::class
+                CalendarWidget::class,
+                CalendarWidgetSuper::class
             ])
             ->middleware([
                 EncryptCookies::class,
