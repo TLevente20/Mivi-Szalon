@@ -25,6 +25,7 @@ class Appointment extends Model
         'cancellation_reason',
         'phone',        
         'service_id',
+        'user_id',
         'status',
         'dog_name',
         'dog_type',
@@ -36,6 +37,11 @@ class Appointment extends Model
         return $this->belongsTo(Service::class);
     }
     
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected $casts = [
         'status' => AppointmentStatus::class,
     ];

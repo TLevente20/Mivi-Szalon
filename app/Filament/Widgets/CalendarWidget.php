@@ -17,7 +17,7 @@ class CalendarWidget extends FullCalendarWidget
     {
         return Appointment::where('start_time', '>=', $fetchInfo['start'])
             ->where('end_time', '<=', $fetchInfo['end'])
-            ->where('status','ACTIVE')
+            ->where('status','ACTIVE')->where('user_id',auth()->id())
             ->get()
             ->map(function (Appointment $task) {
                 $service = Service::where('id',$task->service_id)->first();
@@ -26,7 +26,6 @@ class CalendarWidget extends FullCalendarWidget
                     'title' => $task->name . ' - ' . $service->name,
                     'start' => $task->start_time,
                     'end'   => $task->end_time,
-                    
                 ];
             })
             ->toArray();
@@ -36,7 +35,4 @@ class CalendarWidget extends FullCalendarWidget
     {
         return true;
     }
-
-    
-
 }
