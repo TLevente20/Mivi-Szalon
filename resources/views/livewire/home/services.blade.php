@@ -15,7 +15,7 @@
     </div>
     {{-- See more.. --}}
     <div class="text-center my-16">
-        <a href="#" class="uppercase text-[28px] bg-my-pink-100 px-16 py-4 font-medium rounded-xl">Láss Többet</a>
+        <a href="#" class="uppercase text-[28px] bg-my-pink-100 hover:bg-my-pink-200 px-16 py-4 font-medium rounded-xl duration-300">Láss Többet</a>
     </div>
 
     

@@ -27,7 +27,8 @@ export default {
           500 : '#CED4DA'
         },
         'my-pink' : {
-          100 : '#FF8FAB'
+          100 : '#FF8FAB',
+          200 : '#FF6B90'
         }
       }
     },
