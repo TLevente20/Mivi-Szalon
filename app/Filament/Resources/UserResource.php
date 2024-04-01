@@ -30,6 +30,10 @@ class UserResource extends Resource
 
     protected static ?string $navigationGroup = 'Admin menüpontok';
 
+    public static function canViewAny(): bool
+    {
+        return auth()->user()->role == 'SUPER';
+    }
 
     public static function form(Form $form): Form
     {
@@ -84,7 +88,6 @@ class UserResource extends Resource
             ->query(function (User $query) {
                 return $query->where('role','ADMIN');
                 });
-            ;
     }
 
     public static function getRelations(): array
