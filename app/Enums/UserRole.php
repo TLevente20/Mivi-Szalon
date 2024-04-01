@@ -4,9 +4,7 @@ use App\Traits\Enums\Values;
 
 enum UserRole:string
 {
-    use Values;
-
     case ADMIN = 'admin';
-    case CUSTOMER = 'customer';
+    case SUPER = 'super';
 }
 

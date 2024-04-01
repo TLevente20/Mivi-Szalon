@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 
 
-class CalendarWidget extends FullCalendarWidget
+class CalendarWidgetSuper extends FullCalendarWidget
 {
     public Model | string | null $model = Appointment::class;
 
@@ -18,7 +18,7 @@ class CalendarWidget extends FullCalendarWidget
     {
         return Appointment::where('start_time', '>=', $fetchInfo['start'])
             ->where('end_time', '<=', $fetchInfo['end'])
-            ->where('status','ACTIVE')->where('user_id',auth()->id())
+            ->where('status','ACTIVE')
             ->get()
             ->map(function (Appointment $task) {
                 $service = Service::where('id',$task->service_id)->first();
@@ -35,6 +35,6 @@ class CalendarWidget extends FullCalendarWidget
     public static function canView(): bool
     {
         $user = User::where('id',auth()->id())->first();
-        return $user->role != 'SUPER';
+        return $user->role == 'SUPER';
     }
 }
