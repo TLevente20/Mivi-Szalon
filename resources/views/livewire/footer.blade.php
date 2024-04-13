@@ -2,9 +2,9 @@
     <hr class="border-t-4 border-my-black-100">
     <img src="{{asset('img/footer-logo.png')}}" alt="footer logo" class=" h-[241px] mt-[-35px] mx-auto">
     <div class="mt-8 text-center text-[15px] font-medium text-my-black-100">
-        <a href="#" class="">Főoldal</a>
+        <a href="{{ route('home') }}" class="">Főoldal</a>
         <a href="#" class="ml-4">Rólunk</a>
-        <a href="#" class="ml-4">Házirend</a>
+        <a href="{{ route('hazirend') }}" class="ml-4">Házirend</a>
         <a href="#" class="ml-4">Kapcsolat</a>
         <a href="#" class="ml-4">Kutyasuli</a>
         <a href="#" class="ml-4">Galéria</a>
