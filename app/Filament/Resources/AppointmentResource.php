@@ -17,6 +17,7 @@ use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
 
+use function PHPUnit\Framework\isNull;
 use function PHPUnit\Framework\matches;
 
 class AppointmentResource extends Resource
@@ -34,10 +35,24 @@ class AppointmentResource extends Resource
         return $form
             ->schema([  
                 
-                TextInput::make('name')->label('Név')->required()->maxLength(200)->autocomplete(),
-                TextInput::make('dog_name')->label('Kutya neve')->maxLength(200)->autocomplete(),
-                TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200)->autocomplete(),
-                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->maxLength(50)->autocomplete(),
+                TextInput::make('name')->label('Név')->required()->maxLength(200)
+                ->afterStateUpdated(function (?string $state, Set $set) {
+                    
+                    if(!is_null($state)){
+                        $autoCId = Appointment::where('name', $state)
+                        ->latest('created_at')
+                        ->value('id');
+                        if(!is_null($autoCId)){
+                            $AutoCUser = Appointment::where('id',$autoCId)->first();
+                            $set('dog_name', $AutoCUser->dog_name);
+                            $set('dog_type', $AutoCUser->dog_type);
+                            $set('phone', $AutoCUser->phone);
+                        }
+                    } 
+                })->live(),
+                TextInput::make('dog_name')->label('Kutya neve')->maxLength(200),
+                TextInput::make('dog_type')->label('Kutya fajtája')->maxLength(200),
+                TextInput::make('phone')->label('Telefonszám')->tel()->default('+36')->maxLength(50),
 
                 Select::make('service_id')
                     ->label('Szolgáltatás')
