@@ -7,7 +7,6 @@ use App\Models\Service;
 use App\Models\User;
 use Saade\FilamentFullCalendar\Widgets\FullCalendarWidget;
 use Illuminate\Database\Eloquent\Model;
-use Filament\Forms\Components\TextInput;
 
 
 class CalendarWidget extends FullCalendarWidget
@@ -18,7 +17,7 @@ class CalendarWidget extends FullCalendarWidget
     {
         return Appointment::where('start_time', '>=', $fetchInfo['start'])
             ->where('end_time', '<=', $fetchInfo['end'])
-            ->where('status','ACTIVE')->where('user_id',auth()->id())
+            ->where('status','ACTIVE')
             ->get()
             ->map(function (Appointment $task) {
                 $service = Service::where('id',$task->service_id)->first();
